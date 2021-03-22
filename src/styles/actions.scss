@@ -14,8 +14,9 @@
     justify-content: space-between;
 
     .panel {
-      height: fit-content;
       display: flow-root;
+      height: fit-content;
+      text-decoration: none;
       color: $black;
       background-color: $mainYellow;
       padding: 2vh 2vw;
