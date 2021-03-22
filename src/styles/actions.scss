@@ -15,6 +15,7 @@
 
     .panel {
       height: fit-content;
+      display: flow-root;
       color: $black;
       background-color: $mainYellow;
       padding: 2vh 2vw;
@@ -25,7 +26,7 @@
       }
     }
 
-    .panel:first-child {
+    .panel.first {
       transform: translateY(-20px);
     }
 
@@ -34,12 +35,13 @@
       transform: translateY(20px);
     }
 
-    .panel:last-child {
+    .panel.last {
       transform: translateY(-5px);
     }
 
     .panel:hover {
       opacity: 1;
+      cursor: pointer;
       .arrow-right-icon {
         animation: bounceRight 1500ms;
       }
@@ -59,7 +61,7 @@
 @media only screen and (max-width: 1000px) {
   .actions {
     .actions-content {
-      .panel:last-child {
+      .panel.last {
         visibility: hidden;
         display: none;
       }
