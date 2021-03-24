@@ -23,4 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 
-/src/utils/recipies.ts
+./firebase.config.js
+
+/src/components/admin.tsx

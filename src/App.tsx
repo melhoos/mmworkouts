@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/App.scss';
 import Footer from './components/footer';
 import Home from './components/home';
+import Admin from './components/admin';
 import { Route, Switch } from 'wouter';
 
 function App(): JSX.Element {
@@ -18,6 +19,7 @@ function App(): JSX.Element {
         <Route path="/whatsnext">
           {() => <div> What's next coming soon </div>}
         </Route>
+        <Route path="/admin" component={Admin} />
       </Switch>
       <Footer />
     </div>
