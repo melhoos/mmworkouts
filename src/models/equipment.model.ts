@@ -1,13 +1,13 @@
 import { Base } from './base.model';
 
 enum EquipmentId {
-  EXERCISEMAT,
-  RUBBERBAND,
-  MINIBAND,
-  TRXSLING,
-  DUMBBELL,
-  KETTLEBELL,
-  OTHERWEIGHT,
+  EXERCISEMAT = 'exercisemat',
+  RUBBERBAND = 'rubberband',
+  MINIBAND = 'miniband',
+  TRXSLING = 'trxsling',
+  DUMBBELL = 'dumbbell',
+  KETTLEBELL = 'kettlebell',
+  OTHERWEIGHT = 'otherweight',
 }
 
 export interface Equipment extends Base {

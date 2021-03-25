@@ -1,9 +1,9 @@
 import { Base } from './base.model';
 
 enum ConsiderationId {
-  PREGNANCY,
-  POSTPREGNANCY,
-  SENIOR,
+  PREGNANCY = 'pregnancy',
+  POSTPREGNANCY = 'postpregnancy',
+  SENIOR = 'senior',
 }
 
 export interface Consideration extends Base {

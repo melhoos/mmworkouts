@@ -1,10 +1,10 @@
 import { Base } from './base.model';
 
 enum ExerciseTypeId {
-  STRENGTH,
-  CARDIO,
-  FLEXIBILITY,
-  BALANCE,
+  STRENGTH = 'strength',
+  CARDIO = 'cardio',
+  FLEXIBILITY = 'flexibility',
+  BALANCE = 'balance',
 }
 
 export interface ExerciseType extends Base {

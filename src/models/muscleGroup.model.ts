@@ -1,16 +1,16 @@
 import { Base } from './base.model';
 
 enum MuscleGroupId {
-  SHOULDER,
-  NECK,
-  BICEP,
-  TRICEP,
-  CORE,
-  BACK,
-  LOWERBACK,
-  GLUTES,
-  THIGHS,
-  LEGS,
+  SHOULDER = 'shoulder',
+  NECK = 'neck',
+  BICEP = 'bicep',
+  TRICEP = 'tricep',
+  CORE = 'core',
+  BACK = 'back',
+  LOWERBACK = 'lowerback',
+  GLUTES = 'glutes',
+  THIGHS = 'thighs',
+  LEGS = 'legs',
 }
 
 export interface MuscleGroup extends Base {
