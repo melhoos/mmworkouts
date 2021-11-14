@@ -11,6 +11,7 @@ interface Props {
 const ExerciseSearch = (props: Props): JSX.Element => {
   return (
     <Select
+      className="exerciseSearch"
       closeMenuOnSelect={false}
       getOptionLabel={(opt: ExerciseOption) => opt.label}
       getOptionValue={(opt: ExerciseOption) => opt.value}

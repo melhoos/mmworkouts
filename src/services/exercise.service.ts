@@ -12,36 +12,65 @@ import { Exercise } from '../models/exercise.model';
 async function getExercises(
   selectedExerciseOptions: ExerciseOption[]
 ): Promise<Exercise[]> {
-  return Promise.all([
-    getExercisesByEquipments(selectedExerciseOptions),
-    getExercisesByMainMuscleGroup(selectedExerciseOptions),
-  ]).then((result) => {
-    const equipmentResult: Exercise[] = result[0];
-    const mainMuscleGroupResult: Exercise[] = result[1];
-    const union = equipmentResult.filter((er) =>
-      mainMuscleGroupResult.some((mmg) => er.name === mmg.name)
+  const equipments: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.EQUIPMENTS
+  );
+
+  const mainMuscleGroups: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.MAIN_MUSCLE_GROUPS
+  );
+
+  const types: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.TYPE
+  );
+
+  if (equipments.length == 0 && mainMuscleGroups.length == 0) {
+    return getExercisesByType(types);
+  } else if (equipments.length == 0) {
+    return filterExercisesByType(
+      types,
+      await getExercisesByMainMuscleGroup(mainMuscleGroups)
     );
-    return getExercisesByType(selectedExerciseOptions, union);
-  });
+  } else if (mainMuscleGroups.length == 0) {
+    return filterExercisesByType(
+      types,
+      await getExercisesByEquipments(equipments)
+    );
+  } else {
+    return Promise.all([
+      getExercisesByEquipments(equipments),
+      getExercisesByMainMuscleGroup(mainMuscleGroups),
+    ]).then((result) => {
+      const equipmentResult: Exercise[] = result[0];
+      const mainMuscleGroupResult: Exercise[] = result[1];
+      const union = equipmentResult.filter((er) =>
+        mainMuscleGroupResult.some((mmg) => er.name === mmg.name)
+      );
+      return filterExercisesByType(types, union);
+    });
+  }
 }
 
-function getExercisesByType(
-  selectedExerciseOptions: ExerciseOption[],
-  union: Exercise[]
-): Exercise[] {
-  let types: string[] = selectedExerciseOptions
-    .filter((eOpt) => eOpt.metadata.category == ExerciseCategory.TYPE)
-    .map((typeOpt) => typeOpt.value);
+function filterExercisesByType(types: string[], union: Exercise[]): Exercise[] {
   types = types.length > 0 ? types : ALL_EXERCISE_TYPES;
   return union.filter((e) => types.includes(e.type));
 }
 
+async function getExercisesByType(types: string[]): Promise<Exercise[]> {
+  types = types.length > 0 ? types : ALL_EXERCISE_TYPES;
+
+  const q = query(collection(db, 'Exercises'), where('type', 'in', types));
+  const exerciseSnapshot = await getDocs(q);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return exerciseSnapshot.docs.map((doc: { data: () => any }) => doc.data());
+}
+
 async function getExercisesByEquipments(
-  selectedExerciseOptions: ExerciseOption[]
+  equipments: string[]
 ): Promise<Exercise[]> {
-  let equipments: string[] = selectedExerciseOptions
-    .filter((eOpt) => eOpt.metadata.category == ExerciseCategory.EQUIPMENTS)
-    .map((eOpt) => eOpt.value);
   equipments = equipments.length > 0 ? equipments : ALL_EQUIPMENTS;
 
   const q = query(
@@ -54,13 +83,8 @@ async function getExercisesByEquipments(
 }
 
 async function getExercisesByMainMuscleGroup(
-  selectedExerciseOptions: ExerciseOption[]
+  mainMuscleGroups: string[]
 ): Promise<Exercise[]> {
-  let mainMuscleGroups: string[] = selectedExerciseOptions
-    .filter(
-      (eOpt) => eOpt.metadata.category == ExerciseCategory.MAIN_MUSCLE_GROUPS
-    )
-    .map((mOpt) => mOpt.value);
   mainMuscleGroups =
     mainMuscleGroups.length > 0 ? mainMuscleGroups : ALL_MUSCLE_GROUPS;
   const q = query(
@@ -70,6 +94,15 @@ async function getExercisesByMainMuscleGroup(
   const exerciseSnapshot = await getDocs(q);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return exerciseSnapshot.docs.map((doc: { data: () => any }) => doc.data());
+}
+
+function getSelectedOptionByCategory(
+  selectedExerciseOptions: ExerciseOption[],
+  category: ExerciseCategory
+): string[] {
+  return selectedExerciseOptions
+    .filter((eOpt) => eOpt.metadata.category == category)
+    .map((mOpt) => mOpt.value);
 }
 
 function addExercise(exercise: Exercise): void {

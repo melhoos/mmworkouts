@@ -24,8 +24,10 @@ const Exercises = (): JSX.Element => {
   return (
     <div className="exercises">
       <ExerciseSearch onSelect={onSelected} />
-      <button onClick={onClickSearch}> Søk! </button>
-      <ExerciseResult />
+      <button className="exerciseSearchBtn" onClick={onClickSearch}>
+        Søk!
+      </button>
+      <ExerciseResult exercises={exercises} />
     </div>
   );
 };
