@@ -10,9 +10,8 @@ const contextDefaultValues: RecipieFilterContextState = {
   updateRecipieTypes: () => undefined,
 };
 
-export const RecipieFilterContext = createContext<RecipieFilterContextState>(
-  contextDefaultValues
-);
+export const RecipieFilterContext =
+  createContext<RecipieFilterContextState>(contextDefaultValues);
 
 const RecipieTypesProvider: FC = ({ children }) => {
   const [recipieTypes, setRecipieTypes] = useState<string[]>(

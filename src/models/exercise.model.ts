@@ -1,15 +1,15 @@
-import { Equipment } from './equipment.model';
-import { Consideration } from './consideration.model';
-import { ExerciseType } from './exerciseType.model';
-import { MuscleGroup } from './muscleGroup.model';
-import { Base } from './base.model';
-
-export interface Exercise extends Base {
+export interface Exercise {
   id: string;
-  exercise_type: ExerciseType;
-  main_muscle_groups: MuscleGroup[];
-  equipments_needed: Equipment[];
-  considerations: Consideration[];
-  tips: string;
-  url: string;
+  name: string;
+  type: string;
+  main_muscle_group: string[];
+  equipments: string[];
+  // name_no: string;
+  // name_en: string;
+  // exercise_type_id: string;
+  // main_muscle_group_ids: string[];
+  // equipments_needed_ids: string[];
+  // consideration_ids: string[];
+  // tips: string;
+  // url: string;
 }
