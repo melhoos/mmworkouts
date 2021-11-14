@@ -6,6 +6,7 @@ import exerciseOptions from '../../utils/exerciseOptions';
 
 interface Props {
   onSelect: (optionsSelected: MultiValue<ExerciseOption>) => void;
+  onMenuClose: () => void;
 }
 
 const ExerciseSearch = (props: Props): JSX.Element => {
@@ -17,6 +18,7 @@ const ExerciseSearch = (props: Props): JSX.Element => {
       getOptionValue={(opt: ExerciseOption) => opt.value}
       options={exerciseOptions}
       onChange={props.onSelect}
+      onMenuClose={props.onMenuClose}
       isMulti
     />
   );

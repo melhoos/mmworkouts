@@ -11,22 +11,23 @@ const Exercises = (): JSX.Element => {
   const [selectedOptions, setSelectedOptions] = useState<ExerciseOption[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
 
-  const onClickSearch = () => {
-    getExercises(selectedOptions).then((result: Exercise[]) => {
-      setExercises(result);
-      //console.log('result: ', result);
-    });
-  };
-
   const onSelected = (optionsSelected: MultiValue<ExerciseOption>): void => {
     setSelectedOptions(optionsSelected.map((opt: ExerciseOption) => opt));
   };
+
+  const onMenuClose = () => {
+    if (selectedOptions.length > 0) {
+      getExercises(selectedOptions).then((result: Exercise[]) => {
+        setExercises(result);
+      });
+    } else {
+      setExercises([]);
+    }
+  };
+
   return (
     <div className="exercises">
-      <ExerciseSearch onSelect={onSelected} />
-      <button className="exerciseSearchBtn" onClick={onClickSearch}>
-        Søk!
-      </button>
+      <ExerciseSearch onSelect={onSelected} onMenuClose={onMenuClose} />
       <ExerciseResult exercises={exercises} />
     </div>
   );

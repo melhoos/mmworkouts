@@ -6,9 +6,9 @@ interface Props {
 }
 
 const ExerciseResult = (props: Props): JSX.Element => {
-  const exerciseResultCard = (exercise: Exercise) => {
+  const exerciseResultCard = (exercise: Exercise, index: number) => {
     return (
-      <div className="exerciseCard">
+      <div className="exerciseCard" key={index}>
         <div>{exercise.name}</div>
         <div>{exercise.type}</div>
         <div>
@@ -27,8 +27,8 @@ const ExerciseResult = (props: Props): JSX.Element => {
 
   return (
     <div className="exerciseResult">
-      {props.exercises.map((exercise: Exercise) =>
-        exerciseResultCard(exercise)
+      {props.exercises.map((exercise: Exercise, index: number) =>
+        exerciseResultCard(exercise, index)
       )}
     </div>
   );
