@@ -1,13 +1,7 @@
-import { Equipment } from './equipment.enum';
-import { Consideration } from './consideration.enum';
-import { ExerciseType } from './exerciseType.enum';
-import { MuscleGroup } from './muscleGroup.enum';
-
-export type Exercise = {
+export interface Exercise {
+  id: string;
   name: string;
-  description: string;
-  exerciseType: ExerciseType;
-  mainMuscleGroups: MuscleGroup[];
-  equipmentsNeeded: Equipment[];
-  considerations: Consideration[];
-};
+  type: string;
+  main_muscle_group: string[];
+  equipments: string[];
+}

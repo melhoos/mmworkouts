@@ -1,20 +1,17 @@
 import React from 'react';
 import './styles/App.scss';
-import Logo from './components/logo';
-import About from './components/about';
-import Actions from './components/actions';
 import Footer from './components/footer';
+import Header from './components/header';
+import Exercises from './components/exercises/exercises';
+// import Home from './components/home';
+// import Admin from './components/admin';
+// import { Route, Switch } from 'wouter';
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <header>
-        <Logo />
-      </header>
-      <main>
-        <About />
-        <Actions />
-      </main>
+      <Header />
+      <Exercises />
       <Footer />
     </div>
   );
