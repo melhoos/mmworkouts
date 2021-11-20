@@ -9,9 +9,15 @@
   header,
   footer {
     text-align: center;
-    color: $mainLightGrey;
+    color: $mainWhite;
     padding: 20px 10px;
     background-color: $mainColor;
+  }
+  header {
+    border-bottom: 12px solid $green;
+    img {
+      width: 80px;
+    }
   }
   footer {
     margin-top: auto;

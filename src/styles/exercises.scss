@@ -17,16 +17,16 @@
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fit, 300px);
     .exerciseCard {
-      border: 1px solid hsl(0, 0%, 80%);
+      border: 1px solid $border;
       border-radius: 2px;
-      box-shadow: hsl(0, 0%, 85%) 2px 5px 10px;
-      background-color: hsl(0, 0%, 95%);
+      box-shadow: $border 2px 5px 10px;
+      background-color: $lightSand;
       .exerciseHeading {
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        border-bottom: 1px solid hsl(0, 0%, 85%);
-        background-color: hsl(0, 0%, 100%);
+        border-bottom: 1px solid $border;
+        background-color: white;
         .exerciseType {
           font-size: 12px;
         }
