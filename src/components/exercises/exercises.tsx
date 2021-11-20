@@ -4,7 +4,7 @@ import ExerciseSearch from './search';
 import { MultiValue } from 'react-select';
 import { getExercises } from '../../services/exercise.service';
 import ExerciseOption from '../../types/exerciseOption.type';
-import { Exercise } from '../../models/exercise.model';
+import { Exercise } from '../../types/exercise.type';
 import '../../styles/exercises.scss';
 
 const Exercises = (): JSX.Element => {

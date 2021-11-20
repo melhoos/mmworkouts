@@ -1,34 +1,20 @@
 import React from 'react';
-import { Exercise } from '../../models/exercise.model';
+import { Exercise } from '../../types/exercise.type';
+import ExerciseCard from './exercisecard';
 
 interface Props {
   exercises: Exercise[];
 }
 
 const ExerciseResult = (props: Props): JSX.Element => {
-  const exerciseResultCard = (exercise: Exercise, index: number) => {
-    return (
-      <div className="exerciseCard" key={index}>
-        <div>{exercise.name}</div>
-        <div>{exercise.type}</div>
-        <div>
-          {exercise.equipments.map(
-            (equipment: string) => `${equipment.toUpperCase()}, `
-          )}
-        </div>
-        <div>
-          {exercise.main_muscle_groups.map(
-            (mainMuscleGroup: string) => `${mainMuscleGroup.toUpperCase()}, `
-          )}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="exerciseResult">
-      {props.exercises.map((exercise: Exercise, index: number) =>
-        exerciseResultCard(exercise, index)
+      {props.exercises.length > 0 ? (
+        props.exercises.map((exercise: Exercise, index: number) => (
+          <ExerciseCard exercise={exercise} index={index} />
+        ))
+      ) : (
+        <>Ingen resultater å vise </>
       )}
     </div>
   );

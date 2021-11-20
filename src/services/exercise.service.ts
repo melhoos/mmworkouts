@@ -1,5 +1,12 @@
 import { db } from '../firebase.config';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  setDoc,
+} from 'firebase/firestore';
 import {
   ALL_EQUIPMENTS,
   ALL_EXERCISE_TYPES,
@@ -7,7 +14,7 @@ import {
 } from '../utils/exerciseOptions';
 import ExerciseCategory from '../enums/exerciseCategory.enum';
 import ExerciseOption from '../types/exerciseOption.type';
-import { Exercise } from '../models/exercise.model';
+import { Exercise } from '../types/exercise.type';
 
 async function getExercises(
   selectedExerciseOptions: ExerciseOption[]
@@ -86,7 +93,9 @@ async function getExercisesByMainMuscleGroup(
   mainMuscleGroups: string[]
 ): Promise<Exercise[]> {
   mainMuscleGroups =
-    mainMuscleGroups.length > 0 ? mainMuscleGroups : ALL_MUSCLE_GROUPS;
+    mainMuscleGroups.length > 0 && !mainMuscleGroups.includes('hele kroppen')
+      ? mainMuscleGroups
+      : ALL_MUSCLE_GROUPS;
   const q = query(
     collection(db, 'Exercises'),
     where('main_muscle_groups', 'array-contains-any', mainMuscleGroups)
@@ -105,16 +114,59 @@ function getSelectedOptionByCategory(
     .map((mOpt) => mOpt.value);
 }
 
-function addExercise(exercise: Exercise): void {
-  // db.collection('Exercise')
-  //   .doc(exercise.id)
-  //   .set(exercise)
-  //   .then(function () {
-  //     console.log('happy!');
-  //   })
-  //   .catch(function (error) {
-  //     console.error('Error writing document: ', error);
-  //   });
+async function addExercise(
+  exerciseName: string,
+  selectedExerciseOptions: ExerciseOption[]
+): Promise<boolean> {
+  if (exerciseName.length == 0) {
+    // eslint-disable-next-line no-console
+    console.warn('No name!');
+    return false;
+  }
+
+  const types: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.TYPE
+  );
+
+  if (types.length == 0) {
+    // eslint-disable-next-line no-console
+    console.warn('No type!');
+    return false;
+  }
+
+  const equipments: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.EQUIPMENTS
+  );
+
+  const mainMuscleGroups: string[] = getSelectedOptionByCategory(
+    selectedExerciseOptions,
+    ExerciseCategory.MAIN_MUSCLE_GROUPS
+  );
+
+  if (mainMuscleGroups.length == 0) {
+    // eslint-disable-next-line no-console
+    console.warn('Must have at least one musclegroup');
+    return false;
+  }
+
+  const exerciseToAdd: Exercise = {
+    name: exerciseName,
+    type: types[0],
+    main_muscle_groups: mainMuscleGroups,
+    equipments: equipments,
+  };
+
+  return await setDoc(doc(db, 'Exercises', exerciseName), exerciseToAdd)
+    .then(() => {
+      return true;
+    })
+    .catch((e) => {
+      // eslint-disable-next-line no-console
+      console.warn('error: ', e);
+      return false;
+    });
 }
 
 export { addExercise, getExercises };
