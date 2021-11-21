@@ -7,7 +7,7 @@ import ExerciseOption from '../../types/exerciseOption.type';
 import { Exercise } from '../../types/exercise.type';
 import '../../styles/exercises.scss';
 
-const Exercises = (): JSX.Element => {
+const SearchExercises = (): JSX.Element => {
   const [selectedOptions, setSelectedOptions] = useState<ExerciseOption[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
 
@@ -33,4 +33,4 @@ const Exercises = (): JSX.Element => {
   );
 };
 
-export default Exercises;
+export default SearchExercises;

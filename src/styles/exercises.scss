@@ -5,11 +5,9 @@
 
   .exerciseSearch {
     margin-bottom: 2vh;
-  }
-
-  .exerciseSearchBtn {
-    margin-bottom: 2vh;
-    font-size: 18px;
+    div[class$='multiValue'] {
+      background-color: $lightSand;
+    }
   }
 
   .exerciseResult {
