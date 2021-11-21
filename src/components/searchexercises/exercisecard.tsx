@@ -14,13 +14,7 @@ const ExerciseCard = (props: Props): JSX.Element => {
 
   const getTypeIcon = (type: string) => {
     const icon = type.toUpperCase() == 'CARDIO' ? faRunning : faDumbbell;
-    return (
-      <FontAwesomeIcon
-        className="spinner-icon"
-        icon={icon}
-        size={iconSize.xs}
-      />
-    );
+    return <FontAwesomeIcon icon={icon} size={iconSize.xs} />;
   };
 
   return (

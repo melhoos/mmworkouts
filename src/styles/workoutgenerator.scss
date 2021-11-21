@@ -1,2 +1,23 @@
+@import './variables.scss';
+
 .workoutGenerator {
+  margin: 4vh 4vw;
+
+  .workoutTypes,
+  .workoutFocus,
+  .workoutEquipments {
+    margin-bottom: 4vh;
+    div[class$='control'] {
+      border-color: #8b9193;
+    }
+    div[class$='multiValue'] {
+      background-color: $lightSand;
+    }
+  }
+  .workoutFocus,
+  .workoutEquipments {
+    .checkBtn {
+      margin-top: 15px;
+    }
+  }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
-import { MultiValue } from 'react-select';
+import Select, { MultiValue } from 'react-select';
 import ExerciseOption from '../../types/exerciseOption.type';
 import exerciseOptions from '../../utils/exerciseOptions';
 
