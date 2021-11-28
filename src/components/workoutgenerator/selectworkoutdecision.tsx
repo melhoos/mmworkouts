@@ -19,18 +19,18 @@ const SelectWorkoutDecision = (props: Props): JSX.Element => {
   return (
     <div className="workoutDecision">
       <Button
-        className="checkBtn"
+        color="secondary"
+        className="workoutDecisionBtn"
         variant={selectShowExercises ? 'contained' : 'outlined'}
         onClick={onSelectShowExercises}
-        color="primary"
       >
         <span className="label">{'Vis meg øvelser'}</span>
       </Button>
       <Button
-        className="checkBtn"
+        color="secondary"
+        className="workoutDecisionBtn"
         variant={selectGenerateWorkout ? 'contained' : 'outlined'}
         onClick={onSelectGenerateWorkout}
-        color="primary"
       >
         <span className="label">{'Lag en økt'}</span>
       </Button>

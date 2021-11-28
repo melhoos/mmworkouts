@@ -4,7 +4,15 @@ import SelectWorkoutType from './selectworkouttype';
 import SelectWorkoutFocus from './selectworkoutfocus';
 import SelectWorkoutEquipments from './selectworkoutequipments';
 import SelectWorkoutDecision from './selectworkoutdecision';
-import Exercises from './exercises';
+import Exercises from '../exercises/exercises';
+
+const formIsValid = (
+  types: string[],
+  focuses: string[],
+  equipments: string[]
+): boolean => {
+  return types.length > 0 && focuses.length > 0 && equipments.length > 0;
+};
 
 const WorkoutGenerator = (): JSX.Element => {
   const [workoutTypes, setWorkoutTypes] = useState<string[]>([]);
@@ -28,9 +36,7 @@ const WorkoutGenerator = (): JSX.Element => {
   };
 
   const renderWorkoutDecision = () => {
-    return workoutTypes.length > 0 &&
-      workoutFocuses.length > 0 &&
-      workoutEquipments.length > 0 ? (
+    return formIsValid(workoutTypes, workoutFocuses, workoutEquipments) ? (
       <SelectWorkoutDecision
         selectShowExercises={selectShowExercises}
         onSelectShowExercises={onSelectShowExercises}
@@ -43,7 +49,10 @@ const WorkoutGenerator = (): JSX.Element => {
   };
 
   const renderExercisesOrWorkout = () => {
-    if (selectShowExercises) {
+    if (
+      selectShowExercises &&
+      formIsValid(workoutTypes, workoutFocuses, workoutEquipments)
+    ) {
       return (
         <Exercises
           workoutTypes={workoutTypes}
@@ -52,7 +61,7 @@ const WorkoutGenerator = (): JSX.Element => {
         />
       );
     } else if (selectGenerateWorkout) {
-      return <>'workout her'</>;
+      return <>kommer økt her</>;
     }
   };
 

@@ -20,6 +20,7 @@
     }
   }
   footer {
+    border-top: 12px solid $green;
     margin-top: auto;
   }
   .workoutTitle {
@@ -27,8 +28,10 @@
     font-weight: 450;
     color: $green;
   }
-  .checkBtn {
+  .checkBtn,
+  .workoutDecisionBtn {
     margin-right: 15px;
+    margin-bottom: 15px;
     .checkIcon {
       svg {
         margin-left: 5px;

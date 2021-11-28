@@ -31,6 +31,7 @@ const SelectWorkoutType = (props: Props): JSX.Element => {
       <Button
         key={workoutType}
         className="checkBtn"
+        color="secondary"
         variant={isSelected ? 'contained' : 'outlined'}
         onClick={() => onClickWorkoutTypeBtn(workoutType)}
         disabled={selectAll}

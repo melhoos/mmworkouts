@@ -7,7 +7,7 @@
   .workoutFocus,
   .workoutEquipments,
   .workoutDecision {
-    margin-bottom: 4vh;
+    margin-bottom: calc(4vh - 15px);
     div[class$='control'] {
       border-color: #8b9193;
     }
