@@ -23,6 +23,7 @@ const Exercises = (props: Props): JSX.Element => {
   const { workoutTypes, workoutFocuses, workoutEquipments } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [noExerciseFound, setNoExerciseFound] = useState<boolean>(false);
 
   useEffect(() => {
     if (
@@ -33,6 +34,7 @@ const Exercises = (props: Props): JSX.Element => {
       setLoading(true);
       getExercises(workoutTypes, workoutFocuses, workoutEquipments)
         .then((result: Exercise[]) => {
+          setNoExerciseFound(result.length == 0);
           setExercises(result);
         })
         .finally(() => {
@@ -79,6 +81,10 @@ const Exercises = (props: Props): JSX.Element => {
         <Box sx={{ width: '100%' }}>
           <LinearProgress color="secondary" sx={{ height: '6px' }} />
         </Box>
+      ) : noExerciseFound ? (
+        <Typography variant="body2" color="text.secondary">
+          Ingen øvelser funnet
+        </Typography>
       ) : (
         <Grid container spacing={2} className="exercises">
           {exercises.map((exercise: Exercise, i: number) =>
