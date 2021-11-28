@@ -29,7 +29,7 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
 
   const onClickNoEquipments = () => {
     setNoEquipments(!noEquipments);
-    setWorkoutEquipments(['Ingen utstyr']);
+    setWorkoutEquipments(noEquipments ? [] : ['ingen utstyr']);
     setWorkoutEquipmentsForSelect([]);
   };
 

@@ -12,7 +12,7 @@ export function mapToSelectOptionArrayFromStringArray(
 }
 
 function mapToSelectOption(option: string): SelectOption {
-  return { label: option, value: option };
+  return { label: option, value: option.toLowerCase() };
 }
 
 export function mapToStringArray(

@@ -29,6 +29,7 @@ const SelectWorkoutType = (props: Props): JSX.Element => {
     const isSelected: boolean = selectedWorkoutTypes.includes(workoutType);
     return (
       <Button
+        key={workoutType}
         className="checkBtn"
         variant={isSelected ? 'contained' : 'outlined'}
         onClick={() => onClickWorkoutTypeBtn(workoutType)}

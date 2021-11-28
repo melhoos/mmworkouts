@@ -5,7 +5,8 @@
 
   .workoutTypes,
   .workoutFocus,
-  .workoutEquipments {
+  .workoutEquipments,
+  .workoutDecision {
     margin-bottom: 4vh;
     div[class$='control'] {
       border-color: #8b9193;
@@ -19,5 +20,9 @@
     .checkBtn {
       margin-top: 15px;
     }
+  }
+  .workoutDecision {
+    padding-top: 4vh;
+    border-top: 6px solid $green;
   }
 }
