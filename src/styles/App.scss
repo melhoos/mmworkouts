@@ -1,12 +1,44 @@
 @import './variables.scss';
 
 .App {
-  font-size: 18px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 16px;
+  color: $mainColor;
   header,
   footer {
-    color: $mainLightGrey;
+    text-align: center;
+    color: $mainWhite;
     padding: 20px 10px;
     background-color: $mainColor;
+  }
+  header {
+    border-bottom: 12px solid $green;
+    img {
+      width: 80px;
+    }
+  }
+  footer {
+    border-top: 12px solid $green;
+    margin-top: auto;
+  }
+  .workoutTitle {
+    font-size: 18px;
+    font-weight: 450;
+    color: $green;
+  }
+  .checkBtn,
+  .workoutDecisionBtn {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    .checkIcon {
+      svg {
+        margin-left: 5px;
+      }
+      .iconPlaceholder {
+        margin-right: 19px;
+      }
+    }
   }
 }

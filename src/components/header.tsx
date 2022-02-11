@@ -1,9 +1,10 @@
 import React from 'react';
+import logo from '../assets/svgs/logo.svg';
 
 const Header = (): JSX.Element => {
   return (
     <header>
-      <div>mm.workouts</div>
+      <img src={logo} alt="mm.workouts logo" />
     </header>
   );
 };
