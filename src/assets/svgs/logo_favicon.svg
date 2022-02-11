@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="180" height="180" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <line x1="10" x2="10" y1="30" y2="110" stroke="#182328" stroke-width="5"/>
+  <line x1="10.433" x2="50" y1="31.411" y2="90" stroke="#182328" stroke-width="5" style=""/>
+  <line x1="89.58" x2="50" y1="31.396" y2="90" stroke="#182328" stroke-width="5" style=""/>
+  <line x1="90" x2="90" y1="30" y2="110" stroke="#182328" stroke-width="5"/>
+  <line x1="90.457" x2="130" y1="31.396" y2="90" stroke="#182328" stroke-width="5" style=""/>
+  <line x1="169.562" x2="130" y1="31.426" y2="90" stroke="#182328" stroke-width="5" style=""/>
+  <line x1="170" x2="170" y1="30" y2="110" stroke="#182328" stroke-width="5"/>
+  <line x1="50" x2="50" y1="90" y2="151" stroke="#182328" stroke-width="5"/>
+  <line x1="130" x2="130" y1="90" y2="151" stroke="#182328" stroke-width="5"/>
+  <line x1="50.744" x2="90" y1="149.233" y2="110" stroke="#182328" stroke-width="5" style=""/>
+  <line x1="90" x2="129.278" y1="110" y2="149.233" stroke="#182328" stroke-width="5" style=""/>
+</svg>

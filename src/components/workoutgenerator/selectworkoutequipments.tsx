@@ -49,6 +49,12 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
         onClickF={onClickNoEquipments}
         isDisabled={false}
       />
+      <CheckBtn
+        label="På treningssenteret"
+        isSelected={noEquipments}
+        onClickF={onClickNoEquipments}
+        isDisabled={false}
+      />
     </div>
   );
 };
