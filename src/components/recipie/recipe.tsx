@@ -7,7 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   recipe: Recipe;
-  triggerUpdate: (id: number) => void;
+  triggerUpdate: () => void;
 }
 
 const RecipeBlock = (props: Props): JSX.Element => {
@@ -17,7 +17,7 @@ const RecipeBlock = (props: Props): JSX.Element => {
     const updatedRecipie: Recipe = { ...recipe, likes: recipe.likes + 1 };
     updateRecipe(updatedRecipie).then(() => {
       // trigger update
-      triggerUpdate(recipe.id);
+      triggerUpdate();
     });
   };
   return (
