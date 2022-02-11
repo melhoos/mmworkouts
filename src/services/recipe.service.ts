@@ -9,7 +9,7 @@ async function getRecipes(): Promise<Recipe[]> {
 }
 
 async function updateRecipe(recipe: Recipe): Promise<void> {
-  return await updateDoc(doc(db, 'Recipes', recipe.title), recipe);
+  return await updateDoc(doc(db, 'Recipes', recipe.id), recipe);
 }
 
 export { getRecipes, updateRecipe };
