@@ -3,20 +3,17 @@ import WorkoutEquipment from '../../enums/workoutEquipments.enum';
 import Select, { MultiValue } from 'react-select';
 import SelectOption, {
   mapToSelectOptionArrayFromStringArray,
-  mapToStringArray,
   mapToSelectOptionArray,
 } from '../../types/selectOption.type';
 import CheckBtn from '../commons/checkBtn';
 
 interface Props {
-  setWorkoutEquipments: (selectedWorkoutEquipments: string[]) => void;
+  workoutEquipments: SelectOption[];
+  setWorkoutEquipments: (selectedWorkoutEquipments: SelectOption[]) => void;
 }
 
 const SelectWorkoutEquipments = (props: Props): JSX.Element => {
-  const { setWorkoutEquipments } = props;
-  const [workoutEquipmentsForSelect, setWorkoutEquipmentsForSelect] = useState<
-    SelectOption[]
-  >([]);
+  const { workoutEquipments, setWorkoutEquipments } = props;
   const [noEquipments, setNoEquipments] = useState<boolean>(false);
   const [atGym, setAtGym] = useState<boolean>(false);
   const [disableEquipmentSelect, setDisableEquipmentSelect] =
@@ -25,8 +22,7 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
     mapToSelectOptionArrayFromStringArray(Object.values(WorkoutEquipment));
 
   const onSelectChange = (optionsSelected: MultiValue<SelectOption>) => {
-    const selectedWorkoutEquipments = mapToStringArray(optionsSelected);
-    setWorkoutEquipmentsForSelect(mapToSelectOptionArray(optionsSelected));
+    const selectedWorkoutEquipments = mapToSelectOptionArray(optionsSelected);
     setWorkoutEquipments(selectedWorkoutEquipments);
   };
 
@@ -34,16 +30,20 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
     setNoEquipments(!noEquipments);
     setAtGym(false);
     setDisableEquipmentSelect(!noEquipments);
-    setWorkoutEquipments(noEquipments ? [] : ['ingen utstyr']);
-    setWorkoutEquipmentsForSelect([]);
+    setWorkoutEquipments(
+      noEquipments
+        ? []
+        : mapToSelectOptionArray([
+            { label: 'ingen utstyr', value: 'ingen utstyr' },
+          ])
+    );
   };
 
   const onClickAtGym = () => {
     setAtGym(!atGym);
     setNoEquipments(false);
     setDisableEquipmentSelect(!atGym);
-    setWorkoutEquipmentsForSelect(allWorkoutEquipmentOptions);
-    setWorkoutEquipments(mapToStringArray(allWorkoutEquipmentOptions));
+    setWorkoutEquipments(allWorkoutEquipmentOptions);
   };
 
   return (
@@ -54,7 +54,7 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
         options={allWorkoutEquipmentOptions}
         onChange={onSelectChange}
         isDisabled={disableEquipmentSelect}
-        value={workoutEquipmentsForSelect}
+        value={workoutEquipments}
       />
       <CheckBtn
         label="Ingen utstyr"

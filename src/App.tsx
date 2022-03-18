@@ -3,7 +3,7 @@ import './styles/App.scss';
 import Footer from './components/footer';
 import Header from './components/header';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import WorkoutForm from './components/workoutform/workoutform';
+import Main from './components/main';
 
 function App(): JSX.Element {
   const theme = createTheme({
@@ -20,7 +20,7 @@ function App(): JSX.Element {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        <WorkoutForm />
+        <Main />
         <Footer />
       </div>
     </ThemeProvider>

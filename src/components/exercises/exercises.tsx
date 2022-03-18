@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { getExercises } from '../../services/exercise.service';
+import React from 'react';
 import { Exercise } from '../../types/exercise.type';
 import Card from '@mui/material/Card';
 import WorkoutType from '../../enums/workoutType.enum';
@@ -10,38 +9,13 @@ import Avatar from '@mui/material/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell, faRunning } from '@fortawesome/free-solid-svg-icons';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
 
 interface Props {
-  workoutTypes: string[];
-  workoutFocuses: string[];
-  workoutEquipments: string[];
+  exercises: Exercise[];
 }
 
 const Exercises = (props: Props): JSX.Element => {
-  const { workoutTypes, workoutFocuses, workoutEquipments } = props;
-  const [loading, setLoading] = useState<boolean>(false);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [noExerciseFound, setNoExerciseFound] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (
-      workoutTypes.length > 0 &&
-      workoutFocuses.length > 0 &&
-      workoutEquipments.length > 0
-    ) {
-      setLoading(true);
-      getExercises(workoutTypes, workoutFocuses, workoutEquipments)
-        .then((result: Exercise[]) => {
-          setNoExerciseFound(result.length == 0);
-          setExercises(result);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }, [workoutTypes, workoutFocuses, workoutEquipments]);
+  const { exercises } = props;
 
   const renderExercise = (exercise: Exercise, index: number) => {
     return (
@@ -76,23 +50,11 @@ const Exercises = (props: Props): JSX.Element => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {loading ? (
-        <Box sx={{ width: '100%' }}>
-          <LinearProgress color="secondary" sx={{ height: '6px' }} />
-        </Box>
-      ) : noExerciseFound ? (
-        <Typography variant="body2" color="text.secondary">
-          Ingen øvelser funnet
-        </Typography>
-      ) : (
-        <Grid container spacing={2} className="exercises">
-          {exercises.map((exercise: Exercise, i: number) =>
-            renderExercise(exercise, i)
-          )}
-        </Grid>
+    <Grid container spacing={2} className="exercises">
+      {exercises.map((exercise: Exercise, i: number) =>
+        renderExercise(exercise, i)
       )}
-    </Box>
+    </Grid>
   );
 };
 

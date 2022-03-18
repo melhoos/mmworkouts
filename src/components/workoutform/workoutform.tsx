@@ -1,81 +1,42 @@
-import React, { useState } from 'react';
-import '../../styles/workoutgenerator.scss';
+import React from 'react';
 import SelectWorkoutType from './selectworkouttype';
 import SelectWorkoutFocus from './selectworkoutfocus';
 import SelectWorkoutEquipments from './selectworkoutequipments';
-import SelectWorkoutDecision from './selectworkoutdecision';
-import Exercises from '../exercises/exercises';
+import SelectOption from '../../types/selectOption.type';
 
-const formIsValid = (
-  types: string[],
-  focuses: string[],
-  equipments: string[]
-): boolean => {
-  return types.length > 0 && focuses.length > 0 && equipments.length > 0;
-};
+interface Props {
+  workoutTypes: string[];
+  setWorkoutTypes: (workoutTypes: string[]) => void;
+  workoutFocuses: SelectOption[];
+  setWorkoutFocuses: (workoutFocuses: SelectOption[]) => void;
+  workoutEquipments: SelectOption[];
+  setWorkoutEquipments: (workoutEquipments: SelectOption[]) => void;
+}
 
-const WorkoutForm = (): JSX.Element => {
-  const [workoutTypes, setWorkoutTypes] = useState<string[]>([]);
-  const [workoutFocuses, setWorkoutFocuses] = React.useState<string[]>([]);
-  const [workoutEquipments, setWorkoutEquipments] = React.useState<string[]>(
-    []
-  );
-  const [selectShowExercises, setSelectShowExercises] =
-    useState<boolean>(false);
-  const [selectGenerateWorkout, setSelectGenerateWorkout] =
-    useState<boolean>(false);
-
-  const onSelectShowExercises = () => {
-    setSelectGenerateWorkout(false);
-    setSelectShowExercises(true);
-  };
-
-  const onSelectGenerateWorkout = () => {
-    setSelectGenerateWorkout(true);
-    setSelectShowExercises(false);
-  };
-
-  const renderWorkoutDecision = () => {
-    return formIsValid(workoutTypes, workoutFocuses, workoutEquipments) ? (
-      <SelectWorkoutDecision
-        selectShowExercises={selectShowExercises}
-        onSelectShowExercises={onSelectShowExercises}
-        selectGenerateWorkout={selectGenerateWorkout}
-        onSelectGenerateWorkout={onSelectGenerateWorkout}
-      />
-    ) : (
-      <></>
-    );
-  };
-
-  const renderExercisesOrWorkout = () => {
-    if (!formIsValid(workoutTypes, workoutFocuses, workoutEquipments)) {
-      return <></>;
-    }
-
-    if (selectShowExercises) {
-      return (
-        <Exercises
-          workoutTypes={workoutTypes}
-          workoutFocuses={workoutFocuses}
-          workoutEquipments={workoutEquipments}
-        />
-      );
-    } else if (selectGenerateWorkout) {
-      return <>kommer økt her</>;
-    }
-  };
+const WorkoutForm = (props: Props): JSX.Element => {
+  const {
+    workoutTypes,
+    setWorkoutTypes,
+    workoutFocuses,
+    setWorkoutFocuses,
+    workoutEquipments,
+    setWorkoutEquipments,
+  } = props;
 
   return (
-    <div className="workoutGenerator">
+    <div className="workoutform">
       <SelectWorkoutType
         selectedWorkoutTypes={workoutTypes}
         setSelectedWorkoutTypes={setWorkoutTypes}
       />
-      <SelectWorkoutFocus setWorkoutFocuses={setWorkoutFocuses} />
-      <SelectWorkoutEquipments setWorkoutEquipments={setWorkoutEquipments} />
-      {renderWorkoutDecision()}
-      {renderExercisesOrWorkout()}
+      <SelectWorkoutFocus
+        workoutFocuses={workoutFocuses}
+        setWorkoutFocuses={setWorkoutFocuses}
+      />
+      <SelectWorkoutEquipments
+        workoutEquipments={workoutEquipments}
+        setWorkoutEquipments={setWorkoutEquipments}
+      />
     </div>
   );
 };
