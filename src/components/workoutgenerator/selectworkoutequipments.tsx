@@ -18,6 +18,9 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
     SelectOption[]
   >([]);
   const [noEquipments, setNoEquipments] = useState<boolean>(false);
+  const [atGym, setAtGym] = useState<boolean>(false);
+  const [disableEquipmentSelect, setDisableEquipmentSelect] =
+    useState<boolean>(false);
   const allWorkoutEquipmentOptions: SelectOption[] =
     mapToSelectOptionArrayFromStringArray(Object.values(WorkoutEquipment));
 
@@ -29,8 +32,18 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
 
   const onClickNoEquipments = () => {
     setNoEquipments(!noEquipments);
+    setAtGym(false);
+    setDisableEquipmentSelect(!noEquipments);
     setWorkoutEquipments(noEquipments ? [] : ['ingen utstyr']);
     setWorkoutEquipmentsForSelect([]);
+  };
+
+  const onClickAtGym = () => {
+    setAtGym(!atGym);
+    setNoEquipments(false);
+    setDisableEquipmentSelect(!atGym);
+    setWorkoutEquipmentsForSelect(allWorkoutEquipmentOptions);
+    setWorkoutEquipments(mapToStringArray(allWorkoutEquipmentOptions));
   };
 
   return (
@@ -40,7 +53,7 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
         isMulti
         options={allWorkoutEquipmentOptions}
         onChange={onSelectChange}
-        isDisabled={noEquipments}
+        isDisabled={disableEquipmentSelect}
         value={workoutEquipmentsForSelect}
       />
       <CheckBtn
@@ -51,8 +64,8 @@ const SelectWorkoutEquipments = (props: Props): JSX.Element => {
       />
       <CheckBtn
         label="På treningssenteret"
-        isSelected={noEquipments}
-        onClickF={onClickNoEquipments}
+        isSelected={atGym}
+        onClickF={onClickAtGym}
         isDisabled={false}
       />
     </div>

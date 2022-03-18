@@ -49,10 +49,11 @@ const WorkoutGenerator = (): JSX.Element => {
   };
 
   const renderExercisesOrWorkout = () => {
-    if (
-      selectShowExercises &&
-      formIsValid(workoutTypes, workoutFocuses, workoutEquipments)
-    ) {
+    if (!formIsValid(workoutTypes, workoutFocuses, workoutEquipments)) {
+      return <></>;
+    }
+
+    if (selectShowExercises) {
       return (
         <Exercises
           workoutTypes={workoutTypes}
