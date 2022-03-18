@@ -3,10 +3,7 @@ import './styles/App.scss';
 import Footer from './components/footer';
 import Header from './components/header';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import WorkoutGenerator from './components/workoutgenerator/workoutgenerator';
-//import SearchExercises from './components/searchexercises/searchexercises';
-//import Workouts from './components/workouts/workouts';
-//import AddExercise from './components/addexercise/addExercise';
+import WorkoutForm from './components/workoutform/workoutform';
 
 function App(): JSX.Element {
   const theme = createTheme({
@@ -23,10 +20,7 @@ function App(): JSX.Element {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        <WorkoutGenerator />
-        {/* <SearchExercises /> */}
-        {/* <AddExercise /> */}
-        {/* <Workouts /> */}
+        <WorkoutForm />
         <Footer />
       </div>
     </ThemeProvider>
