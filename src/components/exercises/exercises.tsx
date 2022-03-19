@@ -19,8 +19,8 @@ const Exercises = (props: Props): JSX.Element => {
 
   const renderExercise = (exercise: Exercise, index: number) => {
     return (
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <Card key={index} variant="outlined">
+      <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+        <Card variant="outlined">
           <CardHeader
             avatar={
               <Avatar
